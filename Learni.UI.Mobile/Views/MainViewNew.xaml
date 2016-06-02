@@ -1,0 +1,139 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="Learni.UI.Mobile.Views.MainViewNew"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:command="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WP8"
+    xmlns:converters="clr-namespace:Learni.UI.Mobile.Converters"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait"  Orientation="Portrait"
+    shell:SystemTray.IsVisible="{Binding LoadingDataInProgress}"
+    shell:SystemTray.BackgroundColor="#333"
+    shell:SystemTray.ForegroundColor="#fff"
+    DataContext="{Binding Main, Source={StaticResource Locator}}">
+
+    <phone:PhoneApplicationPage.Resources>
+        <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+    </phone:PhoneApplicationPage.Resources>
+
+    <shell:SystemTray.ProgressIndicator>
+        <shell:ProgressIndicator IsIndeterminate="True" Text="Loading dictionaries..." IsVisible="{Binding LoadingDataInProgress}" />
+    </shell:SystemTray.ProgressIndicator>
+
+    <!--LayoutRoot contains the root grid where all other page content is placed-->
+    <Grid x:Name="LayoutRoot">
+        <phone:Panorama x:Name="LayoutPanorama" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,0">
+            <phone:Panorama.TitleTemplate>
+                <DataTemplate>
+                    <Grid Height="70"/>
+                </DataTemplate>
+            </phone:Panorama.TitleTemplate>
+
+            <phone:Panorama.HeaderTemplate>
+                <DataTemplate>
+                    <TextBlock Foreground="Black" FontFamily="{StaticResource PhoneFontFamilySemiLight}" Text="{Binding}" Margin="0,36,0,-24" FontSize="{StaticResource PhoneFontSizeExtraLarge}" />
+                </DataTemplate>
+            </phone:Panorama.HeaderTemplate>
+
+            <phone:Panorama.Background>
+                <ImageBrush Stretch="Fill" ImageSource="/Assets/Images/SchoolBackground.png"/>
+            </phone:Panorama.Background>
+
+            <!--Panorama item one-->
+            <phone:PanoramaItem Header="Now Learning" >
+                <Grid Margin="12,0,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="150*"/>
+                        <RowDefinition Height="509*"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0">
+                        <TextBlock  Visibility="{Binding IsPackageChoosed, Converter={StaticResource BoolToVisibilityConverter}}" Foreground="#333" HorizontalAlignment="Stretch" TextWrapping="Wrap" FontSize="{StaticResource PhoneFontSizeLarge}" Padding="0" FontFamily="{StaticResource PhoneFontFamilySemiBold}" Text="{Binding CurrentPackage.Name}" VerticalAlignment="Top"/>
+                        <TextBlock  Visibility="{Binding IsPackageChoosed, Converter={StaticResource BoolToVisibilityConverter}}" Margin="0,12,0,0" Foreground="#333" HorizontalAlignment="Stretch" TextWrapping="Wrap" FontSize="{StaticResource PhoneFontSizeMedium}" Padding="0" FontFamily="{StaticResource PhoneFontFamilyNormal}" Text="{Binding CurrentPackage.Description}" VerticalAlignment="Top"/>
+                    </StackPanel>
+                    <TextBlock Visibility="{Binding IsPackageChoosed, Converter={StaticResource BoolToVisibilityConverter}}" Grid.Row="1" Margin="0,12,0,0" Foreground="Black" HorizontalAlignment="Stretch" TextWrapping="Wrap" FontSize="{StaticResource PhoneFontSizeLarge}" Padding="0" FontFamily="{StaticResource PhoneFontFamilySemiLight}" Text="Terms" VerticalAlignment="Top" Height="43"/>
+                    <phone:LongListSelector  Visibility="{Binding IsPackageChoosed, Converter={StaticResource BoolToVisibilityConverter}}" Grid.Row="1" Margin="0,72,0,0" x:Name="TermsList" HorizontalAlignment="Stretch" ItemsSource="{Binding Terms}" VerticalAlignment="Top">
+                        <phone:LongListSelector.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Margin="0,0,0,12" HorizontalAlignment="Stretch">
+                                    <Border Background="Orange" Opacity="0.75" HorizontalAlignment="Left" BorderThickness="0">
+                                        <TextBlock TextAlignment="Center" HorizontalAlignment="Left" Foreground="White" Padding="12,4" Text="{Binding Name}" FontFamily="{StaticResource PhoneFontFamilyNormal}" FontSize="{StaticResource PhoneFontSizeMediumLarge}" Height="45"/>
+                                    </Border>
+                                    <Border Visibility="{Binding IsVisible, Converter={StaticResource BoolToVisibilityConverter}}" Margin="0,6,12,0" Background="White" BorderBrush="LightGray" Opacity="0.75" HorizontalAlignment="Left" BorderThickness="1" CornerRadius="0">
+                                        <TextBlock Foreground="#333" Padding="12,4" HorizontalAlignment="Left" TextWrapping="Wrap" FontSize="{StaticResource PhoneFontSizeMedium}" FontFamily="{StaticResource PhoneFontFamilyNormal}" Text="{Binding Definition}"></TextBlock>
+                                    </Border>
+                                </StackPanel>
+                            </DataTemplate>
+                        </phone:LongListSelector.ItemTemplate>
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Tap">
+                                <command:EventToCommand Command="{Binding ShowHideDefinitionCommand, Mode=OneWay}" CommandParameter="{Binding Path=SelectedItem, ElementName=TermsList}" PassEventArgsToCommand="False"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </phone:LongListSelector>
+                </Grid>
+            </phone:PanoramaItem>
+
+            <!--Panorama item two-->
+            <phone:PanoramaItem Header="Recommended">
+                <Grid Margin="12,0,0,0">
+                    <phone:LongListSelector Margin="0,12,0,0" x:Name="PackagesList" HorizontalAlignment="Stretch" ItemsSource="{Binding Packages}" VerticalAlignment="Top">
+                        <phone:LongListSelector.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Margin="0,0,0,12" HorizontalAlignment="Stretch">
+                                    <StackPanel.Background>
+                                        <SolidColorBrush Color="Orange" Opacity="0.75"/>
+                                    </StackPanel.Background>
+                                    
+                                    <TextBlock Foreground="#fff" HorizontalAlignment="Stretch" FontSize="{StaticResource PhoneFontSizeMedium}" Padding="12,12,12,0" FontFamily="{StaticResource PhoneFontFamilySemiBold}" Text="{Binding Name}" VerticalAlignment="Top" />
+                                    <TextBlock Foreground="#fff" Opacity="0.75" TextWrapping="Wrap" HorizontalAlignment="Stretch" FontSize="{StaticResource PhoneFontSizeSmall}" FontStyle="Normal" Padding="12,0" FontFamily="{StaticResource PhoneFontFamilySemiLight}" Text="{Binding CategoryName}" VerticalAlignment="Top" Height="30"/>
+                                    <TextBlock Foreground="#fff" TextWrapping="Wrap" HorizontalAlignment="Stretch" FontSize="{StaticResource PhoneFontSizeNormal}" Padding="12,0" FontFamily="{StaticResource PhoneFontFamilyNormal}" Text="{Binding Description}" VerticalAlignment="Top" Height="60" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </phone:LongListSelector.ItemTemplate>
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Tap">
+                                <command:EventToCommand Command="{Binding NavigateToPackageCommand, Mode=OneWay}" CommandParameter="{Binding Path=SelectedItem, ElementName=PackagesList}" PassEventArgsToCommand="False"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </phone:LongListSelector>
+                </Grid>
+            </phone:PanoramaItem>
+
+            <!--Panorama item three-->
+            <phone:PanoramaItem Header="Dictionaries">
+                <Grid Margin="12,0,0,0">
+                    <phone:LongListSelector x:Name="CategoriesList" ItemsSource="{Binding Categories}" HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                        <phone:LongListSelector.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Foreground="#333" Margin="0,0,0,24" FontSize="{StaticResource PhoneFontSizeLarge}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" Text="{Binding Name}" HorizontalAlignment="Stretch" />
+                            </DataTemplate>
+                        </phone:LongListSelector.ItemTemplate>
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Tap">
+                                <command:EventToCommand Command="{Binding NavigateToCategoryCommand, Mode=OneWay}" CommandParameter="{Binding Path=SelectedItem, ElementName=CategoriesList}" PassEventArgsToCommand="False"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </phone:LongListSelector>
+                </Grid>
+            </phone:PanoramaItem>
+        </phone:Panorama>
+
+        <StackPanel Height="50" Width="140" Margin="24,0,0,0" Background="#333" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <TextBlock TextAlignment="Center" Foreground="White" Padding="0,2" Text="DICTY" FontFamily="{StaticResource PhoneFontFamilyNormal}" FontSize="{StaticResource PhoneFontSizeLarge}" Height="50"/>
+        </StackPanel>
+    </Grid>
+
+    <!--Sample code showing usage of ApplicationBar-->
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar BackgroundColor="#333" IsVisible="True" IsMenuEnabled="False">
+            <shell:ApplicationBarIconButton x:Name="AddNewPackageButton" IconUri="/Assets/Images/add.png" Text="Create Dictionary" Click="AddNewPackageButton_Click"/>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+</phone:PhoneApplicationPage>

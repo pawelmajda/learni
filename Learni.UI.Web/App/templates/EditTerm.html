@@ -1,0 +1,26 @@
+﻿<div class="modal-header">
+    <h3 ng-hide="{{inEditMode}}">New Term</h3>
+    <h3 ng-show="{{inEditMode}}">Term {{term.name}}</h3>
+</div>
+
+<form name="termForm">
+    <div class="modal-body">
+        <fieldset>
+            <label for="termName">Name</label>
+            <input id="termName" type="text" required ng-model="term.name" placeholder="Term name..." />
+            <br />
+            <label for="termDefinition">Definition</label>
+            <textarea id="termDefinition" ng-model="term.definition" style="width: 70%;"></textarea>
+            <br/>
+            <label for="termImage">Image</label>
+            <input id="termImage" type="file" ng-file-select="onFileSelect($files)">
+            <span ng-show="uploading">Progress: {{progress}} % <a href ng-click="cancelUpload()">Cancel</a></span>
+            <img ng-show="uploaded" style="margin-top: 10px; width: 200px;" ng-src="/api/{{term.imagePath}}" />
+        </fieldset>
+    </div>
+
+    <div class="modal-footer">
+        <button type="submit" ng-click="saveTerm(term, termForm)" class="btn btn-primary">Save</button>
+        <button type="button" ng-click="cancelEdit()" class="btn btn-default">Cancel</button>
+    </div>
+</form>

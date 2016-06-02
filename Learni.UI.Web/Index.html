@@ -1,0 +1,67 @@
+﻿<!doctype html>
+<html lang="en" ng-app="learniApp">
+    <head>
+      <meta charset="utf-8">
+        <title>Learni</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <link rel="icon" type="image/png" href="App/img/favicon.png" />
+
+        <!--<link rel="stylesheet" href="App/css/bootstrap.css" />-->
+        <link href="App/css/bootstrap-old.css" rel="stylesheet" />
+        <link href="App/css/bootstrap-old-responsive.css" rel="stylesheet" />
+        <link rel="stylesheet" href="App/css/flat-ui.css" />
+        <link rel="stylesheet" href="App/css/font-awesome.css" />
+        <link rel="stylesheet" href="App/css/app.css" />
+    </head>
+    <body ng-cloak>
+
+        <ng-view></ng-view>
+        
+        <footer style="background:none;	border-top: 1px #ddd solid; color:#999; height: 20px;">
+            <div class="container" style=" text-align: center;">
+                <div class="row">
+                    <div class="span" style=" text-align: center; float: none;">
+
+                        <center>
+                            <h6 class="footer-copyright" style="text-align: center; float: none; margin:10px;padding:5px;">Learni &copy; 2014</h6>
+                        </center>
+                    </div>
+
+                </div>
+            </div>
+        </footer>
+
+        <script src="App/lib/angular/angular.js"></script>
+        <script src="App/lib/angular/angular-route.js"></script>
+        <script src="App/lib/angular/i18n/angular-locale_en.js"></script>
+        <script src="App/lib/angular/angular-file-upload-shim.js"></script>
+        <script src="App/lib/angular/angular-file-upload.js"></script>
+        <script src="App/lib/underscore.js"></script>
+        <script src="App/lib/restangular.js"></script>
+        <script src="App/lib/ui-bootstrap-0.9.0.js"></script>
+        <script src="App/lib/ui-bootstrap-tpls-0.9.0.js"></script>
+        
+        <script src="App/lib/jquery.js"></script>
+        <script src="App/lib/bootstrap-collapse.js"></script>
+
+        <script src="App/js/app.js"></script>
+        <script src="App/js/directives.js"></script>
+        <!--<script src="App/js/filters.js"></script>-->
+
+        <script src="App/js/controllers/MenuController.js"></script>
+        <script src="App/js/controllers/CategoriesController.js"></script>
+        <script src="App/js/controllers/EditPackageController.js"></script>
+        <script src="App/js/controllers/PackagesController.js"></script>
+        <script src="App/js/controllers/PackageDetailsController.js"></script>
+        <script src="App/js/controllers/EditTermController.js"></script>
+        <script src="App/js/controllers/LoginController.js"></script>
+        <script src="App/js/controllers/RegisterController.js"></script>
+        
+
+        <script src="App/js/services/CategoriesService.js"></script>
+        <script src="App/js/services/PackagesService.js"></script>
+        <script src="App/js/services/TermsService.js"></script>
+        <script src="App/js/services/UsersService.js"></script>
+    </body>
+</html>

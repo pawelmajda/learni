@@ -1,0 +1,19 @@
+﻿<div style="width: 250px; margin-left: auto; margin-right: auto;">
+    <h2 style="text-align: center">Welcome to Learni</h2>
+    <br />
+    <form name="loginForm">
+        <fieldset>
+            <label for="userName">Name</label>
+            <input id="userName" type="text" required ng-model="user.userName" style="width: 250px;" />
+            <br />
+            <label for="userPassword">Password</label>
+            <input id="userPassword" type="password" required ng-model="user.password" style="width: 250px;" />
+        </fieldset>
+        <button type="submit" ng-click="login(user, loginForm)" class="btn btn-primary" style="margin-left: 200px;">Login</button>
+        <br/><span ng-show="isError" style="color: red">Wrong credentials!</span>
+    </form>
+
+    <br />
+    <p>Don't have account yet? <a href="" ng-click="register()" class="btn btn-primary">Register</a></p>
+    <br />
+</div>

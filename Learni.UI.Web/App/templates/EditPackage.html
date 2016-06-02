@@ -1,0 +1,27 @@
+﻿<div class="modal-header">
+    <h3 ng-hide="{{inEditMode}}">New Package</h3>
+    <h3 ng-show="{{inEditMode}}">Package {{package.name}}</h3>
+</div>
+
+<form name="packageForm">
+    <div class="modal-body">
+        <fieldset>
+            <label for="packageName">Name</label>
+            <input id="packageName" type="text" required ng-model="package.name" placeholder="Package name..." />
+            <br />
+            <label for="packageDescription">Description</label>
+            <textarea style="width: 70%" id="packageDescription" ng-model="package.description"></textarea>
+            <br />
+            <label for="packageCategory">Category</label>
+            <select id="packageCategory" required ng-model="package.categoryId" ng-options="category.id as category.name for category in categories" class="form-control">
+            </select>
+            <br/>
+            <input id="packageIsFeatured" type="checkbox" ng-model="package.isFeatured" /> Featured
+        </fieldset>
+    </div>
+
+    <div class="modal-footer">
+        <button type="submit" ng-click="savePackage(package, packageForm)" class="btn btn-primary">Save</button>
+        <button type="button" ng-click="cancelEdit()" class="btn btn-default">Cancel</button>
+    </div>
+</form>

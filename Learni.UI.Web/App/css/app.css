@@ -1,0 +1,120 @@
+/* app css stylesheet */
+
+.menu {
+  list-style: none;
+  border-bottom: 0.1em solid black;
+  margin-bottom: 2em;
+  padding: 0 0 0.5em;
+}
+
+.menu:before {
+  content: "[";
+}
+
+.menu:after {
+  content: "]";
+}
+
+.menu > li {
+  display: inline;
+}
+
+.menu > li:before {
+  content: "|";
+  padding-right: 0.3em;
+}
+
+.menu > li:nth-child(1):before {
+  content: "";
+  padding: 0;
+}
+
+.nav, .pagination, .carousel a { cursor: pointer; }
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
+
+.dodaj-material a{
+ border: 1px #1abc9c solid;
+ width: 130px;
+	}
+	.dodaj-material a:hover{
+ border: 1px #fff solid;
+  color:#fff !important;
+	}
+	.moje-materialy a{
+ border:1px #3498db solid;
+	}
+	.moje-materialy a:hover{
+ border:1px #3498db solid;
+ color:#fff !important;
+	}
+	
+		.moje-materialy2 a{
+ border:1px #3498db solid;
+ color:#3498db ;
+	}
+	.moje-materialy2 a:hover{
+ border:1px #1abc9c solid;
+ color:#1abc9c !important;
+	}
+	
+	.pic img{
+	border: 2px #34495e solid;
+	}
+	.pic:hover img{
+	 border: 2px #1abc9c solid;
+	 border-radius: 50px;
+	}
+	body{
+	background:#f4f4f4;
+	}
+	@media (max-width: 979px) {
+	.navbar-search .span3{
+	width: 97% !important;
+	}
+	}
+	@media (max-width: 767px) {
+	.navbar-search .search-query{
+	width: 100% !important;
+	}
+	}
+
+    .thumbnail{
+padding:0; margin:0.8%; background:#fff; width:18.4%; border:0;-webkit-box-shadow:  1px 1px 5px 0px #999; box-shadow:  1px 1px 5px 0px #999;
+text-decoration:none;
+}
+.thumbnail:hover{
+-webkit-box-shadow:  1px 1px 5px 0px #666; box-shadow:  1px 1px 5px 0px #666;
+}
+.container{
+margin-left: 18%; display: inline-block; position:static; width: 80%;
+}
+@media (max-width: 1370px) {
+.thumbnail{
+width:23.4%;
+}
+}
+@media (max-width: 979px) {
+.thumbnail{
+width:31.5%;
+}
+}
+@media (max-width: 767px) {
+.thumbnail{
+width:47%;
+display:inline-block !important;
+}
+.container{
+margin: 0px; display: inline-block; position:static; width: 100%;
+}
+.row{
+margin:0 !important;
+padding:0!important;
+}
+.span12{
+width: 100%;
+margin:0;
+}
+}

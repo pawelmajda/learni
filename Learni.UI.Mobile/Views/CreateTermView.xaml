@@ -1,0 +1,58 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="Learni.UI.Mobile.Views.CreateTermView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:command="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WP8"
+    xmlns:converters="clr-namespace:Learni.UI.Mobile.Converters"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="{Binding LoadingDataInProgress}"
+    shell:SystemTray.BackgroundColor="#333"
+    shell:SystemTray.ForegroundColor="#fff">
+
+    <shell:SystemTray.ProgressIndicator>
+        <shell:ProgressIndicator IsIndeterminate="True" Text="Loading..." IsVisible="{Binding LoadingDataInProgress}" />
+    </shell:SystemTray.ProgressIndicator>
+
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot"  Background="{StaticResource BackgroundStyle}">
+        <!--ContentPanel - place additional content here-->
+        <Grid x:Name="ContentPanel" Margin="12,72,12,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Margin="12,0,12,0" Foreground="Black" FontFamily="{StaticResource PhoneFontFamilySemiLight}" Text="Add Term" FontSize="{StaticResource PhoneFontSizeExtraLarge}" />
+
+            <StackPanel Grid.Row="2">
+                <TextBlock Margin="12,0,12,0" Foreground="Black" FontFamily="{StaticResource PhoneFontFamilySemiLight}" Text="Term" FontSize="{StaticResource PhoneFontSizeMediumLarge}" />
+                <TextBox x:Name="NameTextBox" Margin="0" Text="{Binding NewTerm.Name, Mode=TwoWay}" HorizontalAlignment="Stretch" VerticalAlignment="Top"  TextWrapping="Wrap" BorderBrush="Black" />
+
+                <TextBlock Margin="12,12,12,0" Foreground="Black" FontFamily="{StaticResource PhoneFontFamilySemiLight}" Text="Definition" FontSize="{StaticResource PhoneFontSizeMediumLarge}" />
+                <TextBox Margin="0,0,0,0" x:Name="DefinitionTextBox" Text="{Binding NewTerm.Definition, Mode=TwoWay}" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="200" TextWrapping="Wrap" BorderBrush="Black" />
+            </StackPanel>
+        </Grid>
+
+        <StackPanel Height="50" Width="140" Margin="24,0,0,0" Background="#333" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <TextBlock TextAlignment="Center" Foreground="White" Padding="0,2" Text="DICTY" FontFamily="{StaticResource PhoneFontFamilyNormal}" FontSize="{StaticResource PhoneFontSizeLarge}" Height="50"/>
+        </StackPanel>
+    </Grid>
+
+    <!--Sample code showing usage of ApplicationBar-->
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar BackgroundColor="#333" IsVisible="True" IsMenuEnabled="False">
+            <shell:ApplicationBarIconButton x:Name="SaveTermButton" IconUri="/Assets/Images/save.png" Text="Save" Click="SaveTermButton_Click"/>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+
+</phone:PhoneApplicationPage>
