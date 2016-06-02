@@ -11,8 +11,7 @@ namespace Learni.UI.Mobile.DataProviders
     public class DataProviderBase
     {
         //public static string ApiUrl = "http://169.254.80.80:59643/api/"; //Emulator
-        //public static string ApiUrl = "http://192.168.1.40:59643/api/"; //Device
-        public static string ApiUrl = "http://dicty.pawelmajda.com/api/"; //Production 
+        public static string ApiUrl = "http://192.168.1.40:59643/api/"; //Device
 
         protected static RestClient RestClient = new RestClient(ApiUrl);
         protected static bool IsAuthenticated = false;
